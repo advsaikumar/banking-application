@@ -1,0 +1,86 @@
+import sys
+users=["user1","user2"]
+pins=["1220","0707"]
+count=0
+class Customer:
+    '''Safe And Secure Banking With Us'''
+    bankname="Sai Bank Of India (SBI)"
+
+    def __init__(self,name,balance=0.0):
+        self.name=name
+        self.balance=balance
+
+    def deposit(self,amount):
+        self.balance=self.balance+amount
+        print('the balance after deposit:',self.balance)
+
+    def withdraw(self,amount):
+        if amount>self.balance:
+            print("insufficient funds....can't perform this opertion")
+            sys.exit()
+        self.balance=self.balance-amount
+        print('the balance after withdraw:',self.balance)
+
+print(Customer.__doc__)
+
+print("welcome to",Customer.bankname)
+while True:
+    print("*"*len(Customer.__doc__))
+    name=input("enter your user name:")
+    name=name.lower()
+    name=name.strip()
+    if name in users:
+        if name==users[0]:
+            print("Welcome",users[0])
+        else:
+            print("Welcome",users[1])
+        break
+    else:
+        print("Invalid Username")
+while count<3:
+    print("*"*len(Customer.__doc__))
+    pin=input("Enter your secert pin:")
+    if pin.isdigit():
+        if name==users[0]:
+            if pin==pins[0]:
+                break
+            else:
+                count +=1
+                print("Invalid Pin")
+                print()
+        if name==users[1]:
+            if pin==pins[1]:
+                break
+            else:
+                count +=1
+                print("Invalid Pin")
+                print()
+    else:
+        print("Pin consists of 4 Digits")
+        count +=1
+if count==3:
+    print("Your 3 unsuccesful pin attempts,Exiting\n No more changes\n try again tommorow")
+    print("Now, your card has been locked for today")
+    print("Thank you, Visit agian")
+    sys.exit()
+
+print("*"*len(Customer.__doc__))
+print("~"*5,"LOGGING SUCCESFULL","~"*5)
+print("~"*5,"We are at your service","~"*5)
+print("*"*len(Customer.__doc__))
+c=Customer(name)
+print(Customer.bankname,"Welcomes you Mr/Ms",name)
+while True:
+    print('d-Deposit \n w-withdraw \n e-exit')
+    option=input('choose your option')
+    if option=='d' or option=='D':
+        amount=float(input('enter amount to deposit:'))
+        c.deposit(amount)
+    elif option=='w' or option=='W':
+        amount=float(input('enter amount to withdraw:'))
+        c.withdraw(amount)
+    elif option=='e' or option=='E':
+        print('Thnaks for Banking at',Customer.bankname)
+        sys.exit()
+    else:
+        print("invalid option....please choose valid option")
